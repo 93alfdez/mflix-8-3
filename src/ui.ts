@@ -1,5 +1,6 @@
-import { Pelicula, TipoFlecha, nombreClases } from "./model";
+import { Pelicula, TipoFlecha, listaPeliculasConfiguracion, nombreClases } from "./model";
 import { flechas } from "./const";
+import { filtrarPeliculas } from "./motor";
 
 const añadirFlecha = (
     contenedor: HTMLDivElement,
@@ -74,8 +75,8 @@ const pintarPeliculas = (peliculas: Pelicula[], peliculaContenedor: HTMLDivEleme
 
 
 export const pintarListaPeliculas = (
-    tituloSeccion: string,
     listaPeliculas: Pelicula[],
+    configuracion: listaPeliculasConfiguracion
 ) => {
     // obtener div principal
     const appDiv = document.getElementById("principal");
@@ -86,7 +87,7 @@ export const pintarListaPeliculas = (
         const crearDivPeliculas = crearContenedor(nombreClases.peliculas, appDiv);
 
         // crear un titulo
-        agregarTitulo(tituloSeccion, crearDivPeliculas);
+        agregarTitulo(configuracion.titulo, crearDivPeliculas);
 
         // crear div lista de peliculas
         const divListaPeliculas = crearContenedor(nombreClases.listaPeliculas, crearDivPeliculas);
@@ -97,8 +98,11 @@ export const pintarListaPeliculas = (
         // añadir flechas
         pintarFlechas(divPeliculasContenedor);
 
+        const peliculasFiltradas = filtrarPeliculas(listaPeliculas, configuracion.filtro);
+
         // pintar peliculas
-        pintarPeliculas(listaPeliculas, divPeliculasContenedor);
+        pintarPeliculas(peliculasFiltradas, divPeliculasContenedor);
+
 
     } else {
         console.error("No se encontró el elemento");

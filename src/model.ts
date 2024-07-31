@@ -18,3 +18,20 @@ export const nombreClases = {
 }
 
 export type TipoFlecha = "izquierda" | "derecha";
+
+export type TipoGenero = "Familiar" | "Aventuras" | "Animación"
+
+export type TipoCaracteristica = "genero" | "premios" | "masVisto" | "calificacionImdb";
+
+export interface FiltroPeliculas {
+    genero?: TipoGenero;
+    caracteristica: TipoCaracteristica;
+    premios?: TipoCaracteristica;
+    masVisto?: TipoCaracteristica;
+    calificacionImdb?: TipoCaracteristica
+}
+
+export interface listaPeliculasConfiguracion {
+    titulo: string;
+    filtro?: FiltroPeliculas;
+}
