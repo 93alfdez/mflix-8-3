@@ -19,9 +19,9 @@ export const nombreClases = {
 
 export type TipoFlecha = "izquierda" | "derecha";
 
-export type TipoGenero = "Familiar" | "Aventuras" | "Animación"
+export type TipoGenero = "Familiar" | "Aventuras" | "Animacion"
 
-export type TipoCaracteristica = "genero" | "premios" | "masVisto" | "calificacionImdb";
+export type TipoCaracteristica = "genero" | "premios" | "masVistas" | "calificacion";
 
 export interface FiltroPeliculas {
     genero?: TipoGenero;

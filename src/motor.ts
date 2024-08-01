@@ -1,4 +1,4 @@
-import { FiltroPeliculas, Pelicula, TipoCaracteristica, TipoGenero } from "./model";
+import { FiltroPeliculas, Pelicula, TipoGenero } from "./model";
 
 export const filtrarPeliculasPorGenero = (
     peliculas: Pelicula[],
@@ -7,37 +7,31 @@ export const filtrarPeliculasPorGenero = (
 
 export const filtrarPeliculasPorPremio = (
     peliculas: Pelicula[],
-    premio?: TipoCaracteristica
-): Pelicula[] => peliculas.filter((pelicula) => pelicula.premioGalardon === true ? false : premio);
+): Pelicula[] => peliculas.filter((pelicula) => pelicula.premioGalardon);
 
 export const filtrarPeliculasPorMasVistas = (
     peliculas: Pelicula[],
-    masVisto?: TipoCaracteristica
-): Pelicula[] => peliculas.filter((pelicula) => pelicula.premioGalardon === true ? false : masVisto);
+): Pelicula[] => peliculas.filter((pelicula) => pelicula.masVisto);
 
 export const filtrarPeliculasPorCalificacion = (
     peliculas: Pelicula[],
-    calificacionImdb?: TipoCaracteristica
-): Pelicula[] => peliculas.toSorted((peliculaA, peliculaB) => peliculaA.calificacionImdb - peliculaB.calificacionImdb);
+): Pelicula[] => peliculas.toSorted((peliculaA, peliculaB) => peliculaB.calificacionImdb - peliculaA.calificacionImdb);
 
 export const filtrarPeliculas = (
     peliculas: Pelicula[],
     filtro?: FiltroPeliculas,
-    premios?: FiltroPeliculas,
-    masVisto?: FiltroPeliculas,
-    calificacionImdb?: FiltroPeliculas
 ): Pelicula[] => {
-    if (!filtro || !premios || !masVisto || calificacionImdb) return peliculas;
+    if (!filtro) return peliculas;
 
     switch (filtro.caracteristica) {
         case "genero":
             return filtrarPeliculasPorGenero(peliculas, filtro.genero);
         case "premios":
-            return filtrarPeliculasPorPremio(peliculas, filtro.premios);
-        case "masVisto":
-            return filtrarPeliculasPorMasVistas(peliculas, filtro.masVisto);
-        case "calificacionImdb":
-            return filtrarPeliculasPorCalificacion(peliculas, filtro.calificacionImdb);
+            return filtrarPeliculasPorPremio(peliculas);
+        case "masVistas":
+            return filtrarPeliculasPorMasVistas(peliculas);
+        case "calificacion":
+            return filtrarPeliculasPorCalificacion(peliculas);
         default:
             return peliculas;
     }
